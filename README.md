@@ -53,6 +53,10 @@ To invoke the codegeneration using `go generate`, specify the generation in 1 of
 
 go-raml needs to be on the path for this to work off course.
 
+## Tutorial
+
+For a complete guide on how to use go-raml check [here](tutorial/INSTRUCTIONS.md).
+
 ## Code generation
 
 Internally, go templates are used to generate the code, this provides a flexible way to alter the generated code and to add different languages for the client.
