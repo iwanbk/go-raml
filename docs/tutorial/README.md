@@ -1,0 +1,78 @@
+# go-raml Tutorial
+
+In this tutorial, we will show you how to:
+
+- getting started with RAML and it's editor
+- generate Go server & client from an RAML file
+- generate Python server & client fron an RAML file
+- integrate Go & Python server with oauth2 server, we use [itsyou.online](https://www.itsyou.online/) as example.
+- accessing auto generated API Docs
+
+## Getting Started
+
+In this section, we give short intro to RAML and it's editor.
+
+1. RAML specification can be found in [RAML 1.0 spec page](http://raml.org/raml-10-spec), if you want to contribute
+  you can find the repo at github https://github.com/raml-org/raml-spec
+
+2. Online RAML editor
+   
+  Online RAML editor can be found in [Anypoint Mulesoft webpage](https://anypoint.mulesoft.com/apiplatform/):
+  
+  - Go to https://anypoint.mulesoft.com/apiplatform/
+  - Press `sign up` button and follow the procedure
+  - Press `Add New API` button
+  - To define your API, press ` Define API in API designer` link 
+   
+
+3. API Workbench as RAML editor
+
+  [API Workbench](http://apiworkbench.com/) is recommended RAML editor. Installation steps:
+  
+  - Install (Atom)[https://atom.io/)
+  - Open "Settings" and "Install Packages", Search for `api-workbench`.
+
+4. API Designed as RAML web editor
+
+  [API Designer](https://github.com/mulesoft/api-designer) is a standalone/embeddable editor for RAML written in JavaScript using Angular.JS.
+  By default, the editor uses an in-browser filesystem stored in HTML5 Localstorage.
+  
+  Installation steps:
+  
+  - Install NPM by following guide in this [page](https://docs.npmjs.com/getting-started/installing-node).
+  - Install api designer : `npm install -g api-designer`
+  - run it : `api-designer`
+
+
+## Get itsyouonline API Key
+
+For itsyou.online oauth2 integration, we need to get itsyou.online API key and secret.
+
+Go to https://www.itsyou.online/ and `Register` if you don't have account there.
+
+After signed in, go to `SETTINGS` tab and add API Key.
+
+![Setting tab](./images/settings.png)
+
+![add API Key](./images/add_api_key.png?raw=true)
+
+
+## Create itsyouonline organization.
+
+In this tutorial we will use itsyou.online organization as a way to authorize the API call.
+
+Go to `ORGANIZATIONS` tab and click `CREATE NEW`.
+
+![Organizations tab](./images/organizations.png)
+![Add organization](./images/organizations_add.png)
+
+## Generate server & client code
+
+Follow below tutorials according to your preferred language:
+
+- [Go tutorial](./go/README.md)
+- Python tutorial
+
+Inside above tutorials, there is guide for `itsyou.online` oauth2 integration and how to access auto generated API docs.
+
+

@@ -29,21 +29,3 @@ We will use [itsyouonline](https://www.itsyou.online/) as Oauth2 Authorization s
 
 `go get -u -v github.com/itsyouonline/identityserver/clients/go/itsyouonline`
 
-
-## Get itsyouonline API Key
-
-Go to https://www.itsyou.online/ and `Register` if you don't have account there.
-
-After signed in, go to `SETTINGS` tab and add API Key.
-
-![](../images/settings.png?raw=true)
-
-![](../images/add_api_key.png?raw=true)
-
-
-## Create itsyouonline organization.
-
-Go to `ORGANIZATIONS` tab and click `CREATE NEW`.
-
-![](../images/organizations.png?raw=true)
-![](../images/organizations_add.png?raw=true)
