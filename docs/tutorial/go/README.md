@@ -103,3 +103,20 @@ The code is relatively simple and have enough comment, so it should be easy to u
 go build
 ./client --app_id=YOUR_APP_ID --api_key=YOUR_API_KEY
 ```
+
+## Auto Generated API server homepage & API Docs
+
+`go-raml` generated code also provide you with a simple homepage and auto generated API docs.
+
+To access it, you can visit http://localhost:5000 from your browser
+
+![API server homepage](images/api_home.png)
+
+If we click `API Docs`, browser will go to auto generated API docs page
+
+![API Docs](images/apidocs_home.png)
+
+We can click any HTTP verbs in the API Docs page to see documentation for that endpoint & verb.
+This is documentation for `POST /users` page
+
+![POST /users](image/apidocs_post_details.png)
