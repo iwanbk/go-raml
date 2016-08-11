@@ -1,4 +1,4 @@
-package main
+package iyo
 
 import (
 	"crypto/ecdsa"
@@ -10,6 +10,7 @@ import (
 )
 
 const (
+	// itsyou.online public key
 	iyoPubKey = `
 -----BEGIN PUBLIC KEY-----
 MHYwEAYHKoZIzj0CAQYFK4EEACIDYgAES5X8XrfKdx9gYayFITc89wad4usrk0n2
@@ -28,24 +29,29 @@ func init() {
 	}
 
 }
-func getIyoUserScope(tokenStr string) (string, string, error) {
+
+// get itsyou.online user's scopes
+func getIyoUserScope(tokenStr string) ([]string, error) {
 	jwtStr := strings.TrimSpace(strings.TrimPrefix(tokenStr, "token"))
 	token, err := jwt.Parse(jwtStr, func(token *jwt.Token) (interface{}, error) {
 		if token.Method != jwt.SigningMethodES384 {
 			return nil, fmt.Errorf("Unexpected signing method: %v", token.Header["alg"])
 		}
-		log.Println("signing method bener")
 		return JWTPublicKey, nil
 	})
 	if err != nil {
-		return "", "", err
+		return []string{}, err
 	}
+
 	claims, ok := token.Claims.(jwt.MapClaims)
 	if !(ok && token.Valid) {
-		return "", "", fmt.Errorf("invalid token")
+		return []string{}, fmt.Errorf("invalid token")
 	}
+
+	// check if the issuer is itsyou.online
 	if claims["iss"].(string) != "itsyouonline" {
-		return "", "", fmt.Errorf("invalid issuer:%v", claims["iss"])
+		return []string{}, fmt.Errorf("invalid issuer:%v", claims["iss"])
 	}
-	return claims["username"].(string), claims["scope"].(string), nil
+
+	return strings.Split(claims["scope"].(string), ","), nil
 }

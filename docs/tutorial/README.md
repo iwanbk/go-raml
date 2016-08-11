@@ -44,7 +44,21 @@ In this section, we give short intro to RAML and it's editor.
   - run it : `api-designer`
 
 
-## Get itsyouonline API Key
+## itsyou.online Oauth2 integration
+
+We will use itsyou.online [JWT support](https://gig.gitbooks.io/itsyouonline/content/oauth2/jwt.html)
+for our oauth2 integration.
+
+A short description about the integrations:
+
+- Client acquire oauth2 token using [Client Credential Flow](https://gig.gitbooks.io/itsyouonline/content/oauth2/oauth2.html)
+- Client generate JWT Token by specifying the scopes. We will use `Organization` the scopes.
+  We can see more about scope in [Scope Concept](https://gig.gitbooks.io/itsyouonline/content/oauth2/scopes.html) and
+  [Available Scopes](https://gig.gitbooks.io/itsyouonline/content/oauth2/availableScopes.html)
+- Client use JWT token to authorize the request
+- Server decode JWT token and check if the scopes match.
+
+**Get itsyouonline API Key**
 
 For itsyou.online oauth2 integration, we need to get itsyou.online API key and secret.
 
@@ -57,14 +71,31 @@ After signed in, go to `SETTINGS` tab and add API Key.
 ![add API Key](./images/add_api_key.png?raw=true)
 
 
-## Create itsyouonline organization.
+**Create itsyouonline organization**
 
-In this tutorial we will use itsyou.online organization as a way to authorize the API call.
+In this tutorial we will use itsyou.online organization feature as a way to authorize the API call.
 
 Go to `ORGANIZATIONS` tab and click `CREATE NEW`.
 
 ![Organizations tab](./images/organizations.png)
+
 ![Add organization](./images/organizations_add.png)
+
+
+**Modify the RAML file**
+
+We need to modify the provided [api.raml](api.raml) to fit our newly created organization.
+
+Let's say you just created these two organizations in previous steps:
+
+- XXX
+- XXX-admin
+
+Then you need to modify:
+
+- `user:memberof:goraml` to `user:memberof:XXX` and
+- `user:memberof:goraml-admin` to `user:memberof:XXX-admin`
+
 
 ## Generate server & client code
 
