@@ -119,4 +119,4 @@ If we click `API Docs`, browser will go to auto generated API docs page
 We can click any HTTP verbs in the API Docs page to see documentation for that endpoint & verb.
 This is documentation for `POST /users` page
 
-![POST /users](image/apidocs_post_details.png)
+![POST /users](images/apidocs_post_details.png)
