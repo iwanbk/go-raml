@@ -1,31 +1,53 @@
 package main
 
 import (
-	"fmt"
+	"flag"
+	"log"
 
 	"github.com/itsyouonline/identityserver/clients/go/itsyouonline"
 )
 
-const (
-	appID  = "..."
-	apiKey = "..."
+var (
+	appID  = flag.String("app_id", "", "application ID")
+	apiKey = flag.String("api_key", "", "API Key")
 )
 
 func main() {
-	klien := itsyouonline.NewItsyouonline()
-	token, err := klien.LoginWithClientCredentials(appID, apiKey)
-	if err != nil {
-		fmt.Printf("get token failed:%v\n", err)
-		return
+	flag.Parse()
+	if *appID == "" || *apiKey == "" {
+		log.Fatalf("please specify itsyou.online application ID & API Key")
 	}
-	fmt.Printf("token = %v\n", token)
 
-	jwt, err := klien.CreateJWTToken([]string{}, []string{})
-	fmt.Printf("err = %v, jwt=%v\n", err, jwt)
+	// create itsyou.online client
+	ioc := itsyouonline.NewItsyouonline()
 
+	// get oauth2 token
+	_, err := ioc.LoginWithClientCredentials(*appID, *apiKey)
+	if err != nil {
+		log.Fatalf("failed to get itsyou.online token:%v\n", err)
+	}
+
+	// create itsyou.online JWT token
+	jwtToken, err := ioc.CreateJWTToken([]string{}, []string{})
+	if err != nil {
+		log.Fatalf("failed to create itsyou.online JWT token:%v", err)
+	}
+
+	// create goramldir client
 	gr := Newgoramldir()
-	gr.AuthHeader = "token " + jwt
 
-	_, _, err = gr.UsersGet(map[string]interface{}{}, map[string]interface{}{})
-	fmt.Printf("err=%v\n", err)
+	// set goramldir authorization header to use JWT token
+	gr.AuthHeader = "token " + jwtToken
+
+	// calling GET /users
+	users, resp, err := gr.UsersGet(map[string]interface{}{}, map[string]interface{}{})
+	if err != nil {
+		log.Fatalf("failed to GET /users:%v, resp code = %v", err, resp.StatusCode)
+	}
+
+	if resp.StatusCode != 200 {
+		log.Fatalf("GET /users failed. http status code = %v", resp.StatusCode)
+	}
+
+	log.Printf("users = %v\n", users)
 }

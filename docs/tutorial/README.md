@@ -8,6 +8,14 @@ In this tutorial, we will show you how to:
 - integrate Go & Python server with oauth2 server, we use [itsyou.online](https://www.itsyou.online/) as example.
 - accessing auto generated API Docs
 
+We will call the generated application as `goramldir`.
+It is a simple server for `go-raml` developer database directory.
+A user with approriate access right could do these things:
+
+- add a developer to `goramldir` database
+- get lisf of all `go-raml` developer
+- get details of a `go-raml` developer
+
 ## Getting Started
 
 In this section, we give short intro to RAML and it's editor.

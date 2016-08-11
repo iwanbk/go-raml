@@ -59,10 +59,47 @@ In `getIyoUserScope` function, you can find code to:
 - check if the token issued by itsyou.online
 - get the `scopes`
 
+**execute the server**
+
+```
+go build
+./goramldir
+```
+
 ## Client
+
+generate client code by using this command
+
+`go-raml client --ramlfile ../api.raml --dir client --package main`
+
+Then you can find client code in `client` directory.
 
 **itsyou.online client library**
 
 We need the library to get oauth2 token and generate JWT token
 
 `go get -u -v github.com/itsyouonline/identityserver/clients/go/itsyouonline`
+
+
+**simple client main program**
+
+A simple example of the client program can be found in [main.go](client/main.go).
+
+Steps to use generated client lib & itsyou.online client lib:
+
+- create itsyou.online client object
+- login to itsyou.online to create oauth2 token
+- create itsyou.online JWT token
+- create `goramldir` client object
+- set JWT token as authorization header
+
+after above steps, client are ready to make API call to `goramldir` server.
+
+The code is relatively simple and have enough comment, so it should be easy to understand. 
+
+** execute client program*
+
+```
+go build
+./client --app_id=YOUR_APP_ID --api_key=YOUR_API_KEY
+```
