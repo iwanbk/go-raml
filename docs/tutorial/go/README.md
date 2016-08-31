@@ -97,11 +97,11 @@ after above steps, client are ready to make API call to `goramldir` server.
 
 The code is relatively simple and have enough comment, so it should be easy to understand. 
 
-** execute client program*
+** execute client program**
 
 ```
 go build
-./client --app_id=YOUR_APP_ID --api_key=YOUR_API_KEY
+./client --app_id=YOUR_APP_ID --app_secret=YOUR_API_KEY
 ```
 
 ## Auto Generated API server homepage & API Docs

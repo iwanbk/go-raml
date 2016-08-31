@@ -60,7 +60,7 @@ for our oauth2 integration.
 A short description about the integrations:
 
 - Client acquire oauth2 token using [Client Credential Flow](https://gig.gitbooks.io/itsyouonline/content/oauth2/oauth2.html)
-- Client generate JWT Token by specifying the scopes. We will use `Organization` the scopes.
+- Client generate JWT Token by specifying the scopes. We will use `Organization` as the scopes.
   We can see more about scope in [Scope Concept](https://gig.gitbooks.io/itsyouonline/content/oauth2/scopes.html) and
   [Available Scopes](https://gig.gitbooks.io/itsyouonline/content/oauth2/availableScopes.html)
 - Client use JWT token to authorize the request

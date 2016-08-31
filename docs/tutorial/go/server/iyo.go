@@ -1,4 +1,4 @@
-package iyo
+package main
 
 import (
 	"crypto/ecdsa"
@@ -53,5 +53,9 @@ func getIyoUserScope(tokenStr string) ([]string, error) {
 		return []string{}, fmt.Errorf("invalid issuer:%v", claims["iss"])
 	}
 
-	return strings.Split(claims["scope"].(string), ","), nil
+	var scopes []string
+	for _, v := range claims["scope"].([]interface{}) {
+		scopes = append(scopes, v.(string))
+	}
+	return scopes, nil
 }

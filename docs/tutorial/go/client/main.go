@@ -8,13 +8,13 @@ import (
 )
 
 var (
-	appID  = flag.String("app_id", "", "application ID")
-	apiKey = flag.String("api_key", "", "API Key")
+	appID     = flag.String("app_id", "", "application ID")
+	appSecret = flag.String("app_secret", "", "application secret")
 )
 
 func main() {
 	flag.Parse()
-	if *appID == "" || *apiKey == "" {
+	if *appID == "" || *appSecret == "" {
 		log.Fatalf("please specify itsyou.online application ID & API Key")
 	}
 
@@ -22,13 +22,13 @@ func main() {
 	ioc := itsyouonline.NewItsyouonline()
 
 	// get oauth2 token
-	_, err := ioc.LoginWithClientCredentials(*appID, *apiKey)
+	_, err := ioc.LoginWithClientCredentials(*appID, *appSecret)
 	if err != nil {
 		log.Fatalf("failed to get itsyou.online token:%v\n", err)
 	}
 
 	// create itsyou.online JWT token
-	jwtToken, err := ioc.CreateJWTToken([]string{}, []string{})
+	jwtToken, err := ioc.CreateJWTToken([]string{"user:memberof:goraml"}, nil)
 	if err != nil {
 		log.Fatalf("failed to create itsyou.online JWT token:%v", err)
 	}
@@ -50,4 +50,5 @@ func main() {
 	}
 
 	log.Printf("users = %v\n", users)
+
 }
